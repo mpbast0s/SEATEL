@@ -15,7 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Kalnia:wght@100..700&family=Libre+Barcode+128+Text&family=Libre+Barcode+39+Extended+Text&family=Questrial&display=swap"
         rel="stylesheet">
-    <title>Certificados SEATEL2024</title>
+    <title>Verificar NOME</title>
     <style>
         .material-symbols-outlined {
             font-variation-settings:
@@ -67,6 +67,23 @@
             margin-bottom: 20px;
             font-family: "Questrial", sans-serif;
             border: 1px black solid;
+        }
+
+        #suggestions {
+
+            position: absolute;
+            width: 300px;
+            background-color: #d7e2e2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            max-height: 200px;
+            margin-top: -15px;
+            overflow-y: auto;
+            display: none;
+            color: #082063;
+            left: 5%;
         }
 
         #suggestions ul {
@@ -209,6 +226,19 @@
             top: 0;
             left: 0;
         }
+
+        @media screen and (max-width: 600px) {
+            #seatel {
+                
+                z-index: 1;
+                margin-top: 10px;
+                margin-left: 10px;
+                top: 10%;    
+                
+                padding-top: 50px;  
+                position: sticky;     
+            }
+        }
     </style>
 </head>
 
@@ -216,9 +246,9 @@
     <div class="container">
         <div id="seatel" style="display: flex; align-items: center;">
 
-            <svg viewBox="0 0 400 400" style="margin-right: 10px; z-index: -1;">
+            <svg viewBox="0 0 400 400" style="margin-right: 10px;">
                 <!-- Concha maior -->
-                <path id="curve1" d="M45.011788,107.36346a40,45 0 1,1 90,0a30,30 0 1,1 -80,0z"
+                <path id="curve1" d="M45.011788,115.36346a40,45 0 1,1 90,0a30,30 0 1,1 -70,0z"
                     transform="rotate(-90 60,100)" />
 
                 <!-- Concha menor -->
@@ -227,7 +257,8 @@
 
                 <text width="500" style="fill: #fff;">
                     <textPath xlink:href="#curve1" startOffset="5%">
-                        <tspan style="font-size: 30px;">CERTIFICADOS<tspan style="fill: rgb(218, 212, 212)">∗⁘◌⁘∗</tspan>
+                        <tspan style="font-size: 30px;">CERTIFICADOS<tspan style="fill: rgb(218, 212, 212)">∗⁘◌⁘∗
+                            </tspan>
                         </tspan>
                     </textPath>
                     <!-- <textPath xlink:href="#curve2" startOffset="50%">
@@ -237,7 +268,7 @@
             </svg>
         </div>
         <div id="nomes">
-            <span style="font-size: 70px;">SEATEL 202<span style="font-size: 45px;" class="material-symbols-outlined">
+            <span style="font-size: 60px;">SEATEL 202<span style="font-size: 45px;" class="material-symbols-outlined">
                     electric_bolt
                 </span>
             </span><br>
@@ -267,9 +298,9 @@
         const input = document.getElementById('nomeInput');
         const suggestionsContainer = document.getElementById('suggestions');
 
-        input.addEventListener('input', function() {
+        input.addEventListener('input', function () {
             const inputValue = this.value.toLowerCase();
-            const suggestions = ['Thaís Celi Melo', "aaaaa"]; // Aqui você pode substituir com suas próprias sugestões
+            const suggestions = ['Thaís Celi Melo', "Thaís"]; // Aqui você pode substituir com suas próprias sugestões
 
             const filteredSuggestions = suggestions.filter(suggestion =>
                 suggestion.toLowerCase().startsWith(inputValue)
@@ -288,7 +319,7 @@
             suggestions.forEach(suggestion => {
                 const li = document.createElement('li');
                 li.textContent = suggestion;
-                li.addEventListener('click', function() {
+                li.addEventListener('click', function () {
                     input.value = suggestion;
                     suggestionsContainer.style.display = 'none';
                     buscarNOME()
