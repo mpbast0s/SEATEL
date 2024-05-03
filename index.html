@@ -268,10 +268,10 @@
             </svg>
         </div>
         <div id="nomes">
-            <span style="font-size: 60px;">SEATEL 202<span style="font-size: 45px;" class="material-symbols-outlined">
+            <span id="seatel202" style="font-size: 60px;">SEATEL 202</span><span style="font-size: 45px;" class="material-symbols-outlined">
                     electric_bolt
                 </span>
-            </span><br>
+            <br>
             <input type="text" id="nomeInput" placeholder="Digite seu Nome">
             <div id="suggestions"></div>
             <button onclick="buscarNOME()">Buscar</button>
@@ -283,6 +283,26 @@
     </div>
 
     <script>
+        var textoCompleto = "SEATEL 202";
+        var textoParcial = "";
+        var index = 0;
+        var velocidade = 100; // Velocidade em milissegundos (quanto menor, mais rápido)
+
+        function escreverTexto() {
+            if (index < textoCompleto.length) {
+                textoParcial += textoCompleto.charAt(index);
+                document.getElementById("seatel202").innerHTML = textoParcial;
+                index++;
+                setTimeout(escreverTexto, velocidade);
+            } else {
+                // Mostra a imagem após o texto ser totalmente escrito
+                document.querySelector('.imagem-secao').style.display = 'block';
+            }
+        }
+
+        escreverTexto();
+
+
         function buscarNOME() {
             //var nome = document.getElementById("nomeInput").value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
             var nome = document.getElementById("nomeInput").value
