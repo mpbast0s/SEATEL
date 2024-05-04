@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Documento</title>
+</head>
+
+<body>
+    
+    <button onclick="verificarDocumento()">Verificar Documento</button>
+
+    <script>
+        async function verificarDocumento() {
+            try {
+                const response = await fetch('./certificados/Thaís Celi Melo.pdf');
+                if (response.ok) {
+                    console.log(`O arquivo '${fileName}' foi encontrado.`);
+                } else {
+                    console.error(`O arquivo '${fileName}' não foi encontrado.`);
+                    alert(`O arquivo '${fileName}' não foi encontrado.`);
+                }
+            }  catch (error) {
+                console.error(`Erro ao verificar o arquivo '${fileName}':`, error);
+                alert(`Erro ao verificar o arquivo '${fileName}'.`);
+            }
+        }
+    </script>
+</body>
+
+</html>
