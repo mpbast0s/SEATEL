@@ -12,6 +12,21 @@
     <button onclick="verificarDocumento()">Verificar Documento</button>
 
     <script>
+        alert(`Não foi possível encontrar seu certificado! \nPara pedir: mande email para maria.bastos@ufpr.br ou para pet.eletrica@ufpr.br `);
+        try {
+                const response = await fetch('./certificados/Thaís Celi Melo.pdf');
+                const fileName = "foi";
+
+                if (response.ok) {
+                    console.log(`O arquivo foi encontrado.`);
+                } else {
+                    console.error(`O arquivo ' não foi encontrado.`);
+                    alert(`Não foi possível encontrar seu certificado! <br> `);
+                }
+            }  catch (error) {
+                console.error(`Erro ao verificar o arquivo :`, error);
+                alert(`Erro ao verificar o arquivo .`);
+            }
         async function verificarDocumento() {
             try {
                 const response = await fetch('./certificados/Thaís Celi Melo.pdf');
@@ -21,7 +36,7 @@
                     console.log(`O arquivo foi encontrado.`);
                 } else {
                     console.error(`O arquivo ' não foi encontrado.`);
-                    alert(`O arquivo  não foi encontrado.`);
+                    alert(`Não foi possível encontrar seu certificado! <br> `);
                 }
             }  catch (error) {
                 console.error(`Erro ao verificar o arquivo :`, error);
