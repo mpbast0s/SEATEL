@@ -102,7 +102,7 @@
         }
 
         button {
-            padding: 20px 20px;
+            padding: 20px;
             background-color: rgb(255, 255, 255);
             color: rgb(0, 33, 66);
             border: none;
@@ -120,26 +120,34 @@
         }
 
         #resultado {
-            margin-top: 20px;
+
+            margin-top: 40px;
+            padding: 20px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: rgb(0, 33, 66);
+            display: none;
+            border: 1px rgb(255, 255, 255) solid;
+            width: 50%;
+            left: 50%;
+            text-decoration: none;
         }
 
         #resultado a {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 20px;
-
-            background-color: rgb(0, 33, 66);
             color: rgb(252, 252, 252);
-            border: 1px rgb(255, 255, 255) solid;
+            text-decoration: none;
+
         }
 
-        #resultado a:hover {
-            background-color: rgb(255, 255, 255);
-            color: rgb(0, 33, 66);
+        #resultado:hover {
+            background-color: rgba(0, 33, 66, 0.9);
+
             border: 1px black solid;
+
+            a {
+                color: rgb(171, 198, 224);
+            }
         }
 
         @font-face {
@@ -215,7 +223,12 @@
             background-repeat: no-repeat;
             opacity: 0.6;
             filter: grayscale(0);
-            transform: rotate(5deg);
+            
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            transform: rotate(5deg) scaleX(-1) ;
 
         }
 
@@ -278,7 +291,7 @@
 
                 <text width="500" style="fill: #fff;">
                     <textPath xlink:href="#curve1" startOffset="5%">
-                        <tspan style="font-size: 30px;">CERTIFICADOS<tspan style="fill: rgb(218, 212, 212)">∗
+                        <tspan style="font-size: 28px;">CERTIFICADOS<tspan style="fill: rgb(218, 212, 212)">
                             </tspan>
                         </tspan>
                     </textPath>
@@ -297,7 +310,9 @@
             <input type="text" id="nomeInput" placeholder="Digite seu Nome">
             <div id="suggestions"></div>
             <button onclick="buscarNOME()">Buscar</button>
-            <div id="resultado"></div>
+            <center>
+                <div id="resultado"></div>
+            </center>
         </div>
         <!-- Elemento para o GIF de fundo -->
         <div id="background-gif">
@@ -311,6 +326,11 @@
         var velocidade = 100; // Velocidade em milissegundos (quanto menor, mais rápido)
 
         function escreverTexto() {
+            textoParcial += textoCompleto.charAt(index);
+            document.getElementById("seatel202").innerHTML = textoParcial;
+            index++;
+            setTimeout(escreverTexto, velocidade);
+            /*
             if (index < textoCompleto.length) {
                 textoParcial += textoCompleto.charAt(index);
                 document.getElementById("seatel202").innerHTML = textoParcial;
@@ -319,7 +339,7 @@
             } else {
                 // Mostra a imagem após o texto ser totalmente escrito
                 document.querySelector('.imagem-secao').style.display = 'block';
-            }
+            }*/
         }
 
         escreverTexto();
@@ -335,6 +355,7 @@
             var url = "certificados/" + nome + ".pdf";
             var resultadoDiv = document.getElementById("resultado");
             resultadoDiv.innerHTML = "<a href='" + url + "' download>" + nome + ".pdf</a>";
+            resultadoDiv.style.display = 'block';
         }
 
         const input = document.getElementById('nomeInput');
