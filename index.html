@@ -223,12 +223,12 @@
             background-repeat: no-repeat;
             opacity: 0.6;
             filter: grayscale(0);
-            
+
             -moz-transform: scaleX(-1);
             -o-transform: scaleX(-1);
             -webkit-transform: scaleX(-1);
             transform: scaleX(-1);
-            transform: rotate(5deg) scaleX(-1) ;
+            transform: rotate(5deg) scaleX(-1);
 
         }
 
@@ -344,18 +344,35 @@
 
         escreverTexto();
 
+        
 
-        function buscarNOME() {
+        async function buscarNOME() {
             //var nome = document.getElementById("nomeInput").value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
             var nome = document.getElementById("nomeInput").value
             /*if (nome.length !== 11) {
                 alert("NOME inválido. Certifique-se de digitar somente os números do NOME.");
                 return;
             }*/
+
             var url = "certificados/" + nome + ".pdf";
-            var resultadoDiv = document.getElementById("resultado");
-            resultadoDiv.innerHTML = "<a href='" + url + "' download>" + nome + ".pdf</a>";
-            resultadoDiv.style.display = 'block';
+            try {
+                const response = await fetch(url);
+                const fileName = "foi";
+
+                if (response.ok) {
+                    console.log(`O arquivo foi encontrado.`);
+                    var resultadoDiv = document.getElementById("resultado");
+                    resultadoDiv.innerHTML = "<a href='" + url + "' download>" + nome + ".pdf</a>";
+                    resultadoDiv.style.display = 'block';
+                } else {
+                    console.error(`O arquivo ' não foi encontrado.`);
+                    alert(`Não foi possível encontrar seu certificado! \nPara pedir: mande email para maria.bastos@ufpr.br ou para pet.eletrica@ufpr.br `);
+                }
+            } catch (error) {
+                console.error(`Erro ao verificar o arquivo :`, error);
+
+            }
+
         }
 
         const input = document.getElementById('nomeInput');
