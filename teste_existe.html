@@ -1,49 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+async function buscarNOME() {
+    //var nome = document.getElementById("nomeInput").value.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
+    var nome = document.getElementById("nomeInput").value
+    /*if (nome.length !== 11) {
+        alert("NOME inválido. Certifique-se de digitar somente os números do NOME.");
+        return;
+    }*/
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificar Documento</title>
-</head>
+    var url = "certificados/" + nome + ".pdf";
+    try {
+        const response = await fetch(url);
+        const fileName = "foi";
 
-<body>
-    
-    <button onclick="verificarDocumento()">Verificar Documento</button>
-
-    <script>
-        alert(`Não foi possível encontrar seu certificado! \nPara pedir: mande email para maria.bastos@ufpr.br ou para pet.eletrica@ufpr.br `);
-        try {
-                const response = await fetch('./certificados/Thaís Celi Melo.pdf');
-                const fileName = "foi";
-
-                if (response.ok) {
-                    console.log(`O arquivo foi encontrado.`);
-                } else {
-                    console.error(`O arquivo ' não foi encontrado.`);
-                    alert(`Não foi possível encontrar seu certificado! <br> `);
-                }
-            }  catch (error) {
-                console.error(`Erro ao verificar o arquivo :`, error);
-                alert(`Erro ao verificar o arquivo .`);
-            }
-        async function verificarDocumento() {
-            try {
-                const response = await fetch('./certificados/Thaís Celi Melo.pdf');
-                const fileName = "foi";
-
-                if (response.ok) {
-                    console.log(`O arquivo foi encontrado.`);
-                } else {
-                    console.error(`O arquivo ' não foi encontrado.`);
-                    alert(`Não foi possível encontrar seu certificado! <br> `);
-                }
-            }  catch (error) {
-                console.error(`Erro ao verificar o arquivo :`, error);
-                alert(`Erro ao verificar o arquivo .`);
-            }
+        if (response.ok) {
+            console.log(`O arquivo foi encontrado.`);
+            var resultadoDiv = document.getElementById("resultado");
+            resultadoDiv.innerHTML = "<a href='" + url + "' download>" + nome + ".pdf</a>";
+            resultadoDiv.style.display = 'block';
+        } else {
+            console.error(`O arquivo ' não foi encontrado.`);
+            alert(`Não foi possível encontrar seu certificado! \nPara pedir: mande email para maria.bastos@ufpr.br ou para pet.eletrica@ufpr.br `);
         }
-    </script>
-</body>
+    } catch (error) {
+        console.error(`Erro ao verificar o arquivo :`, error);
 
-</html>
+    }
+
+}
